@@ -1,0 +1,16 @@
+<suite name="Sales Force Tests">
+
+    <parameter name="org" value="dev">
+
+        <test name="Salesforce Leads Tests">
+
+            <Classes>
+
+                <class name="Clase10.Lead_Tests"></class>
+
+
+
+            </Classes>
+        </test>
+    </parameter>
+</suite>

@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "b6863682-8a03-4ef4-b032-c8e8199b86f3",
+		"name": "Clase 8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreatAnAccount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00D8c000004dckb!ARIAQBkspiFOX4bsEY9sfMA29gAWQc_DS_izKRNOtn3iLodqM9nB1a5S8alQ7RKXQwf0bjWRjtxjtscpC0tpYVAhlE_oYbMz",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kurapika\",\r\n    \"accountNumber\": \"6454\",\r\n    \"phone\": \"456123777\",\r\n    \"description\": \"Kurapika created by Postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SalesforceUri}}/services/data/v51.0/sobjects/Account/",
+					"host": [
+						"{{SalesforceUri}}"
+					],
+					"path": [
+						"services",
+						"data",
+						"v51.0",
+						"sobjects",
+						"Account",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultAnAccount",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00D8c000004dckb!ARIAQBkspiFOX4bsEY9sfMA29gAWQc_DS_izKRNOtn3iLodqM9nB1a5S8alQ7RKXQwf0bjWRjtxjtscpC0tpYVAhlE_oYbMz",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SalesforceUri}}/services/data/v51.0/sobjects/Account/0018c00002AJdp8AAD",
+					"host": [
+						"{{SalesforceUri}}"
+					],
+					"path": [
+						"services",
+						"data",
+						"v51.0",
+						"sobjects",
+						"Account",
+						"0018c00002AJdp8AAD"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SalesforceUri",
+			"value": "https://student-d6-dev-ed.my.salesforce.com",
+			"type": "string"
+		}
+	]
+}

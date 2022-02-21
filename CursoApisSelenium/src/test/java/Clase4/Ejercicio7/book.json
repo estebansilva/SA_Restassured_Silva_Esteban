@@ -1,0 +1,22 @@
+{
+  "libros": [
+    {
+      "categoria": "Ciencia ficción",
+      "autor": "Dan Brown",
+      "titulo": "Inferno",
+      "precio": 3500
+    },
+    {
+      "categoria": "Finanzas",
+      "autor": "Robert Kiyosaki",
+      "titulo": "Padre Rico, Padre Pobre",
+      "precio": 2100
+    },
+    {
+      "categoria": "Testing",
+      "autor": "Lisa Crispin",
+      "titulo": "Agile Testing",
+      "precio": 7500
+    }
+  ]
+}

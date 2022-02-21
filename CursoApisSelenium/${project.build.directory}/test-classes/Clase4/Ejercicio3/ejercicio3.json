@@ -1,0 +1,22 @@
+{
+  "Estudiantes": [
+    {
+      "nombre": "Juan",
+      "apellido": "Lopez",
+      "dni": 123123,
+      "curso": "Informatica"
+    },
+    {
+      "nombre": "Maria",
+      "apellido": "Rodriguez",
+      "dni": 22222,
+      "curso": "Administración"
+    },
+    {
+      "nombre": "Juan",
+      "apellido": "Cowen",
+      "dni": 123456,
+      "curso": "Finanzas"
+    }
+  ]
+}

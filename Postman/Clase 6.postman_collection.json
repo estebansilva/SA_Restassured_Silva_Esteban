@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "40dc27df-37ed-409e-b480-d85154122f27",
+		"name": "Clase 6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateASalesForceToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9riCAn8HHkYWL9mGRkhxRoTSVYWj1iavpQznnQKFsv7CWxn2Sgsc.zuR0KtTBUBP05GeKNTuCZ5PsbDtN&client_secret=BB5244EDE94A2B8322619856A436B8C2FF68F771AAF1516EA0B2D66A16631AF8&username=estebansilva_utn@hotmail.com&password=juxtapose.201x81Jkf9B2ujuoSLdqhimpIGd3",
+					"protocol": "https",
+					"host": [
+						"login",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"oauth2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "client_id",
+							"value": "3MVG9riCAn8HHkYWL9mGRkhxRoTSVYWj1iavpQznnQKFsv7CWxn2Sgsc.zuR0KtTBUBP05GeKNTuCZ5PsbDtN"
+						},
+						{
+							"key": "client_secret",
+							"value": "BB5244EDE94A2B8322619856A436B8C2FF68F771AAF1516EA0B2D66A16631AF8"
+						},
+						{
+							"key": "username",
+							"value": "estebansilva_utn@hotmail.com"
+						},
+						{
+							"key": "password",
+							"value": "juxtapose.201x81Jkf9B2ujuoSLdqhimpIGd3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

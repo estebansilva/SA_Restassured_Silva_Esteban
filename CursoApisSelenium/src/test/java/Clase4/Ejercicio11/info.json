@@ -1,0 +1,8 @@
+{
+  "access_token": "00D1N000001Rznq!AQYAQGGqJYk6Jqt3g8oVNzy2m6QKXGN_utdsdli5xUiwW9O1LROsoQEDmTGI8PO4V17pPC2tJCjlW0b5txdsbOsSL8CG8rW5",
+  "instance_url": "https://emilianognocchi-dev-ed.my.salesforce.com",
+  "id": "https://login.salesforce.com/id/00D1N000001RznqUAC/0051N000005TNbMQAW",
+  "token_type": "Bearer",
+  "issued_at": "1624384798213",
+  "signature": "BSowPjEKEdR55Z8EX/7ym3TDSu/g8EC8SekYP7xBwYs="
+}
