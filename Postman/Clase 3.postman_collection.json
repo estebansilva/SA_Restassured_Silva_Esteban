@@ -1,0 +1,507 @@
+{
+	"info": {
+		"_postman_id": "1040e2d4-e85e-41ec-9cb4-b9f84a42b8e4",
+		"name": "Clase 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ej1 - User Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var respJson = JSON.parse(responseBody);\r",
+							"\r",
+							"tests[\"Response with status code 200\"] = responseCode.code == 200;\r",
+							"tests[\"Body has authenticated\"] = responseBody.has(\"authenticated\");\r",
+							"tests[\"authenticated is true\"] = respJson[\"authenticated\"]=== true;\r",
+							"\r",
+							"pm.test(\"Function - Response with code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"\"ver como hacer los mismos con function\"\r",
+							"pm.test(\"Function - Body has authenticated\"), () => {\r",
+							"    pm.response.to.have.authenticated;\r",
+							"}\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "postman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/basic-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"basic-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej2 - Cookies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var respJson = JSON.parse(responseBody);\r",
+							"\r",
+							"tests[\"Validate Status response code equal 200\"] = responseCode.code == 200;\r",
+							"tests[\"Validate cookies atribute exist\"] = responseBody.has(\"cookies\");\r",
+							"tests[\"Validate cookies existe the word Valor 1\"] = responseBody.has(\"Valor 1\");\r",
+							"\r",
+							"\r",
+							"\"Preguntar pq no funciona la resolución del profe\"\r",
+							"var responseJSON;\r",
+							"try {\r",
+							"\r",
+							"   tests[\"Body contains cookies\"] = responseBody.has(\"cookies\");\r",
+							"   responseJSON = JSON.parse(responseBody);\r",
+							"   tests[\"Body contains cookie foo1\"] = 'Valor 1' in responseJSON.cookies;\r",
+							"   tests[\"Body contains cookie foo2\"] = 'Valor 2' in responseJSON.cookies;   \r",
+							"\r",
+							"}\r",
+							"\r",
+							"catch (e) { }\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/cookies/set?Param 1=Valor 1&Param 2=Valor 2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"cookies",
+						"set"
+					],
+					"query": [
+						{
+							"key": "Param 1",
+							"value": "Valor 1"
+						},
+						{
+							"key": "Param 2",
+							"value": "Valor 2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej3 - Validate Content Type y Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Body contains Content-Type\"] = responseBody.has(\"Content-Type\")\r",
+							"tests[\"Body contains test\"] = responseBody.has(\"test\");\r",
+							"tests[\"Headers Content-Type atribute contains text/html; charset=uft-8\"] = postman.getResponseHeader('Content-Type') == 'text/html; charset=utf-8';\r",
+							"tests[\"Headers test atribute contains response_headers\"] = postman.getResponseHeader(\"test\") === \"response_headers\";\r",
+							"\r",
+							"\"Consultar como hacerlo con functions\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/response-headers?Content-Type=text/html&test=response_headers",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"response-headers"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "text/html"
+						},
+						{
+							"key": "test",
+							"value": "response_headers"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej4 - Validate headers and body in a post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var respJson \r",
+							"try {respJson= JSON.parse(responseBody); }\r",
+							"catch(e){}\r",
+							"\r",
+							"tests[\"Body host atribute have like value the site link\"] = respJson.headers.host == \"postman-echo.com\" \r",
+							"                                                            && respJson.headers[\"x-forwarded-proto\"]==\"https\" \r",
+							"                                                            && respJson.headers[\"content-type\"] == \"text/plain\" \r",
+							"                                                            && respJson.url == \"https://postman-echo.com/post\";\r",
+							"tests[\"Body data atribute contains Holamundo!!\"] = respJson.data == \"Holamundo!!\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Holamundo!!",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej5 - Send a text and validate Body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var respJson;\r",
+							"try { respJson = JSON.parse(responseBody)}\r",
+							"catch (e){};\r",
+							"\r",
+							"tests[\"Body contains files\"] = responseBody.has(\"files\");\r",
+							"tests[\"Body contains args\"] = responseBody.has(\"args\");\r",
+							"tests[\"Body contains form\"] = responseBody.has(\"form\");\r",
+							"tests[\"Body contains headers\"] = responseBody.has(\"headers\");\r",
+							"tests[\"Body contains url\"] = responseBody.has(\"url\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "This is a text"
+				},
+				"url": {
+					"raw": "https://postman-echo.com/put",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"put"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej6 - Validate a book information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const respJson = JSON.parse(responseBody)\r",
+							"tests[\"Validate Book Information\"]  =   respJson.name == \"Just as I Am\" \r",
+							"                                    &&  respJson.author === \"Cicely Tyson\"\r",
+							"                                    &&  respJson.type === \"non-fiction\"\r",
+							"                                    &&  respJson.price === 20.33\r",
+							"                                    &&  respJson[\"current-stock\"] === 0\r",
+							"                                    &&  respJson.available === false;\r",
+							"                                    \r",
+							"\r",
+							"pm.test(\"Validate book information - Function\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.type).to.eql(\"non-fiction\");\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://simple-books-api.glitch.me/books/:bookId",
+					"protocol": "https",
+					"host": [
+						"simple-books-api",
+						"glitch",
+						"me"
+					],
+					"path": [
+						"books",
+						":bookId"
+					],
+					"variable": [
+						{
+							"key": "bookId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej7 - Validate status code in a book request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const respJson = JSON.parse(responseBody);\r",
+							"tests[\"Validate Code Status in request\"] = responseCode.code === 200;\r",
+							"\r",
+							"pm.test(\"Validate Code Status in request - Function\", function () {\r",
+							"  pm.response.to.have.status(200);  \r",
+							"})\r",
+							"\r",
+							"pm.test(\"Validate Code Status in request 2 - Function\", function (){\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Name book is a string - Function\", function(){\r",
+							"    const book = JSON.parse(responseBody);\r",
+							"    pm.expect(book.name).to.be.a(\"string\");\r",
+							"})\r",
+							"\r",
+							"console.log(pm.response.text());\r",
+							"\r",
+							"pm.test(\"Body contains Stest Just as I am\", function (){\r",
+							"    const book = JSON.parse(responseBody);\r",
+							"    pm.expect(book.name).contains(\"Just as I Am\")\r",
+							"})\r",
+							"\r",
+							"\"Another solution\"\r",
+							"\r",
+							"pm.test(\"Body contains String\", () => {\r",
+							"   pm.expect(pm.response.text()).to.include(\"Just\")\r",
+							"});\r",
+							"\r",
+							"\"No funciona la solución del profe para identificar que no haya campos ocultos\"\r",
+							"pm.test(\"Fast Lane hidden fields\", function() {\r",
+							"   let response = pm.response.json()\r",
+							"   pm.expect(response.hiddenFields.length).to.eq(0)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://simple-books-api.glitch.me/books/:bookId",
+					"protocol": "https",
+					"host": [
+						"simple-books-api",
+						"glitch",
+						"me"
+					],
+					"path": [
+						"books",
+						":bookId"
+					],
+					"variable": [
+						{
+							"key": "bookId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej8 - Get not fiction books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const respJson = JSON.parse(responseBody);\r",
+							"console.log(\"Book: ID\" + respJson[0].id + \" - Name: \" +  respJson[0].name + \" - Type: \" + respJson[0].type + \" - Available: \" + respJson[0].available);\r",
+							"console.log(\"Book: ID\" + respJson[1].id + \" - Name: \" +  respJson[1].name + \" - Type: \" + respJson[1].type + \" - Available: \" + respJson[1].available);\r",
+							"\r",
+							"\r",
+							"\"Otra forma de testearlo\"\r",
+							"const response = pm.response.json();\r",
+							"const fictionsNotAvailable = response.filter((book) => book.available === true);\r",
+							"console.log(\"Libros filtrado \" + fictionsNotAvailable[0].name);\r",
+							"const book = fictionsNotAvailable[0];\r",
+							"\r",
+							"pm.test(\"Verificar si hay un libro\", () => {\r",
+							"    \"No es necesario, valida todos los esperados\"\r",
+							"    pm.expect(book).to.be.an('object');\r",
+							"    pm.expect(book.available).to.eql(true);\r",
+							"    pm.expect(book.type).to.eql(\"non-fiction\");\r",
+							"\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(book.name).to.be.a(\"string\");\r",
+							"})\r",
+							"\r",
+							"console.log(pm.response.text());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://simple-books-api.glitch.me/books?type=non-fiction",
+					"protocol": "https",
+					"host": [
+						"simple-books-api",
+						"glitch",
+						"me"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "non-fiction"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ej9 - Get a book and validate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const respJson = pm.response.json();\r",
+							"\r",
+							"const availableBook = respJson.filter((book) => book.available === true);\r",
+							"console.log(\"Libros filtrado \" + availableBook[0].name);\r",
+							"const book = availableBook[0];\r",
+							"\r",
+							"pm.test(\"Get a book and validate the information\", () => {\r",
+							"    pm.expect(respJson.id).to.not.null;\r",
+							"    pm.expect(book).to.be.an('object');\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://simple-books-api.glitch.me/books?type=non-fiction",
+					"protocol": "https",
+					"host": [
+						"simple-books-api",
+						"glitch",
+						"me"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "non-fiction"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
